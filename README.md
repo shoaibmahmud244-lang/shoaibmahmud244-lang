@@ -36,10 +36,19 @@ Data engineer working on web extraction and pipeline reliability.
 
 ## How I work
 
-I verify claims by executing them. Both repos document bugs found that way,
-including the ones I'd shipped in a first pass — the currency bug in the scraper
-silently produced plausible-looking numbers, which is exactly the kind of defect
-that survives a code review and fails in front of a client.
+I verify claims by executing them. Every repo here documents bugs found that
+way, including ones I'd shipped in a first pass:
+
+- the scraper's currency bug silently produced plausible-looking numbers
+- `demo3-workflow`'s log was opened in `"w"` mode, so a re-run destroyed its own
+  evidence and the replacement log *contradicted* the CSV it described
+- the first n8n workflow **could not be imported at all** — missing
+  `connections` and `typeVersion` — and its email node had a subject and
+  recipient but no message body
+
+The n8n pack also ships the validator that caught it. A file that parses as JSON
+is not a workflow that works, and a validator that only ever passes is a rubber
+stamp — so it's negative-tested against the known-broken export too.
 
 Contributor to [OpenMontage](https://github.com/calesthio/OpenMontage) (61k
 stars, AGPL-3.0) — reliability and checkpointing work in the video pipeline.
