@@ -17,7 +17,7 @@ Data engineer working on web extraction and pipeline reliability.
 
 - **[demo1-scraper](https://github.com/shoaibmahmud244-lang/demo1-scraper)** —
   config-driven Python scraper. Commits include the real output of a 1,000-row
-  run, plus five defects I found by *running* the code rather than reading it
+  run, plus four defects I found by *running* the code rather than reading it
   (a `sys.exit` without `import sys`, a resume counter that double-counted rows,
   a BeautifulSoup multi-valued-attribute `TypeError`, and a currency-decoding
   bug that silently stripped `£` from every price).
