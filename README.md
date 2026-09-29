@@ -9,6 +9,9 @@ Data engineer working on web extraction and pipeline reliability.
   readable and debuggable.
 - **Automation with visible state** — webhooks, idempotent upserts, and
   timestamped run logs, so a failure is diagnosable instead of speculative.
+- **n8n workflows that import without secrets** — every credential-dependent
+  node ships disabled, so a client can load the file and see the real graph
+  before handing over any key.
 
 ## Repos
 
@@ -22,6 +25,14 @@ Data engineer working on web extraction and pipeline reliability.
   form → CRM → email automation. The interesting bug: the run log was opened in
   `"w"` mode, so a re-run destroyed its own evidence and the replacement log
   *contradicted* the CSV it claimed to describe.
+- **[n8n-workflow-pack](https://github.com/shoaibmahmud244-lang/n8n-workflow-pack)** —
+  two n8n workflows that import and run with **zero credentials** (every
+  credentialed node ships disabled), plus `validate_workflows.py`, which checks
+  the things that actually break an import. The first version of workflow 1
+  couldn't be imported at all — missing `connections` and `typeVersion` — and its
+  Gmail node had a subject and a recipient but no message body, so it would have
+  sent empty emails. It also treated `Ada@x.com` and `ada@x.com` as two
+  contacts. None of that is visible if you only check that the JSON parses.
 
 ## How I work
 
