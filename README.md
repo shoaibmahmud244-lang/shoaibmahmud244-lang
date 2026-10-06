@@ -34,6 +34,18 @@ Data engineer working on web extraction and pipeline reliability.
   sent empty emails. It also treated `Ada@x.com` and `ada@x.com` as two
   contacts. None of that is visible if you only check that the JSON parses.
 
+- **[sandbox-n8n](https://github.com/shoaibmahmud244-lang/sandbox-n8n)** —
+  lets an n8n workflow plan and approve system changes **without giving n8n a
+  shell**. n8n 2.x disables the Execute Command node on purpose; re-enabling it
+  hands a browser-reachable web app arbitrary command execution. This exposes two
+  endpoints instead (`/plan`, `/approve`), each a fixed argv into a local
+  orchestrator, with the run id regex-validated before it ever reaches a shell —
+  `run_id: "; rm -rf /"` is a 400, not an execution. The README documents the
+  systemd directives that silently break the sandbox underneath it, found by
+  bisecting each one: two of them (`RestrictNamespaces`, `CapabilityBoundingSet=`)
+  made every step fail, and a third (`MemoryDenyWriteExecute`) killed V8 with a
+  `SIGTRAP` core dump.
+
 ## How I work
 
 I verify claims by executing them. Every repo here documents bugs found that
@@ -45,6 +57,9 @@ way, including ones I'd shipped in a first pass:
 - the first n8n workflow **could not be imported at all** — missing
   `connections` and `typeVersion` — and its email node had a subject and
   recipient but no message body
+- my own hardening broke the sandbox shim twice before I checked: a unit that
+  made bubblewrap fail on every step, and a `ufw` rule keyed on the wrong end
+  of the connection — both looked plausible until executed
 
 The n8n pack also ships the validator that caught it. A file that parses as JSON
 is not a workflow that works, and a validator that only ever passes is a rubber
