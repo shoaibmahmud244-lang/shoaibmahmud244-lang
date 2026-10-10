@@ -46,6 +46,13 @@ Data engineer working on web extraction and pipeline reliability.
   made every step fail, and a third (`MemoryDenyWriteExecute`) killed V8 with a
   `SIGTRAP` core dump.
 
+- **[jarvis](https://github.com/shoaibmahmud244-lang/jarvis)** —
+  real-time push-to-talk voice and visual assistant for Wayland/Hyprland. Integrates
+  Voxtype as an on-demand systemd user daemon (~18MB idle RAM, 0% CPU) with single-frame
+  and continuous screen capture (Grim + FFmpeg) into OpenCode reasoning via Nvidia Nemotron.
+  Speech synthesis runs local Kokoro ONNX CPU inference (`bm_george` voice) at 10x–15x
+  faster than real-time with zero resident memory, backed by Engram MCP persistent memory.
+
 ## How I work
 
 I verify claims by executing them. Every repo here documents bugs found that
