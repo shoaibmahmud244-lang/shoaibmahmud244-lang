@@ -71,7 +71,3 @@ way, including ones I'd shipped in a first pass:
 The n8n pack also ships the validator that caught it. A file that parses as JSON
 is not a workflow that works, and a validator that only ever passes is a rubber
 stamp — so it's negative-tested against the known-broken export too.
-
-Contributor to [OpenMontage](https://github.com/calesthio/OpenMontage) (61k
-stars, AGPL-3.0) — reliability and checkpointing work in the video pipeline.
-I contributed 42 of its 463 commits; it isn't mine, and I don't claim it as such.
