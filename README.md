@@ -15,6 +15,25 @@ Data engineer working on web extraction and pipeline reliability.
 
 ## Repos
 
+- **[jarvis](https://github.com/shoaibmahmud244-lang/jarvis)** —
+  real-time push-to-talk voice and visual assistant for Wayland/Hyprland. Integrates
+  Voxtype as an on-demand systemd user daemon (~18MB idle RAM, 0% CPU) with single-frame
+  and continuous screen capture (Grim + FFmpeg) into OpenCode reasoning via Nvidia Nemotron.
+  Speech synthesis runs local Kokoro ONNX CPU inference (`bm_george` voice) at 10x–15x
+  faster than real-time with zero resident memory, backed by Engram MCP persistent memory.
+
+- **[sandbox-n8n](https://github.com/shoaibmahmud244-lang/sandbox-n8n)** —
+  lets an n8n workflow plan and approve system changes **without giving n8n a
+  shell**. n8n 2.x disables the Execute Command node on purpose; re-enabling it
+  hands a browser-reachable web app arbitrary command execution. This exposes two
+  endpoints instead (`/plan`, `/approve`), each a fixed argv into a local
+  orchestrator, with the run id regex-validated before it ever reaches a shell —
+  `run_id: "; rm -rf /"` is a 400, not an execution. The README documents the
+  systemd directives that silently break the sandbox underneath it, found by
+  bisecting each one: two of them (`RestrictNamespaces`, `CapabilityBoundingSet=`)
+  made every step fail, and a third (`MemoryDenyWriteExecute`) killed V8 with a
+  `SIGTRAP` core dump.
+
 - **[demo1-scraper](https://github.com/shoaibmahmud244-lang/demo1-scraper)** —
   config-driven Python scraper. Commits include the real output of a 1,000-row
   run, plus four defects I found by *running* the code rather than reading it
@@ -33,25 +52,6 @@ Data engineer working on web extraction and pipeline reliability.
   Gmail node had a subject and a recipient but no message body, so it would have
   sent empty emails. It also treated `Ada@x.com` and `ada@x.com` as two
   contacts. None of that is visible if you only check that the JSON parses.
-
-- **[sandbox-n8n](https://github.com/shoaibmahmud244-lang/sandbox-n8n)** —
-  lets an n8n workflow plan and approve system changes **without giving n8n a
-  shell**. n8n 2.x disables the Execute Command node on purpose; re-enabling it
-  hands a browser-reachable web app arbitrary command execution. This exposes two
-  endpoints instead (`/plan`, `/approve`), each a fixed argv into a local
-  orchestrator, with the run id regex-validated before it ever reaches a shell —
-  `run_id: "; rm -rf /"` is a 400, not an execution. The README documents the
-  systemd directives that silently break the sandbox underneath it, found by
-  bisecting each one: two of them (`RestrictNamespaces`, `CapabilityBoundingSet=`)
-  made every step fail, and a third (`MemoryDenyWriteExecute`) killed V8 with a
-  `SIGTRAP` core dump.
-
-- **[jarvis](https://github.com/shoaibmahmud244-lang/jarvis)** —
-  real-time push-to-talk voice and visual assistant for Wayland/Hyprland. Integrates
-  Voxtype as an on-demand systemd user daemon (~18MB idle RAM, 0% CPU) with single-frame
-  and continuous screen capture (Grim + FFmpeg) into OpenCode reasoning via Nvidia Nemotron.
-  Speech synthesis runs local Kokoro ONNX CPU inference (`bm_george` voice) at 10x–15x
-  faster than real-time with zero resident memory, backed by Engram MCP persistent memory.
 
 ## How I work
 
