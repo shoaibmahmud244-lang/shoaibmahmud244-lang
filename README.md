@@ -22,6 +22,11 @@ Data engineer working on web extraction and pipeline reliability.
   Speech synthesis runs local Kokoro ONNX CPU inference (`bm_george` voice) at 10x–15x
   faster than real-time with zero resident memory, backed by Engram MCP persistent memory.
 
+- **[voicebox-tui](https://github.com/shoaibmahmud244-lang/voicebox-tui)** —
+  terminal voice studio over chatterbox.cpp: local voice cloning, emotion presets,
+  A/B seed auditioning, and a mastering chain (pitch, EQ, reverb, compression, LUFS)
+  with rnnoise/afftdn denoise. Sources are never modified.
+
 - **[sandbox-n8n](https://github.com/shoaibmahmud244-lang/sandbox-n8n)** —
   lets an n8n workflow plan and approve system changes **without giving n8n a
   shell**. n8n 2.x disables the Execute Command node on purpose; re-enabling it
