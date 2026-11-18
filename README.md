@@ -4,8 +4,8 @@ Data engineer working on web extraction, pipeline reliability, and local voice t
 
 ## What I work on
 
-- **Web scraping that survives production** — resumable extraction, validation,
-  dedupe, and clean CSV/XLSX output. No black-box scraping API: the pipeline is
+- **Web scraping that survives production** — resumable extraction, schema validation,
+  and deduplication into structured CSV/XLSX. No black-box scraping API: the pipeline is
   readable and debuggable.
 - **Automation with visible state** — webhooks, idempotent upserts, and
   timestamped run logs, so a failure is diagnosable instead of speculative.
@@ -57,7 +57,7 @@ Data engineer working on web extraction, pipeline reliability, and local voice t
   two n8n workflows that import and run with **zero credentials** (every
   credentialed node ships disabled), plus `validate_workflows.py`, which checks
   the things that actually break an import. The first version of workflow 1
-  couldn't be imported at all — missing `connections` and `typeVersion` — and its
+  couldn't be imported at all (missing `connections` and `typeVersion`), and its
   Gmail node had a subject and a recipient but no message body, so it would have
   sent empty emails. It also treated `Ada@x.com` and `ada@x.com` as two
   contacts. None of that is visible if you only check that the JSON parses.
@@ -70,8 +70,8 @@ way, including ones I'd shipped in a first pass:
 - the scraper's currency bug silently produced plausible-looking numbers
 - `demo3-workflow`'s log was opened in `"w"` mode, so a re-run destroyed its own
   evidence and the replacement log *contradicted* the CSV it described
-- the first n8n workflow **could not be imported at all** — missing
-  `connections` and `typeVersion` — and its email node had a subject and
+- the first n8n workflow **could not be imported at all** (missing
+  `connections` and `typeVersion`), and its email node had a subject and
   recipient but no message body
 - my own hardening broke the sandbox shim twice before I checked: a unit that
   made bubblewrap fail on every step, and a `ufw` rule keyed on the wrong end
