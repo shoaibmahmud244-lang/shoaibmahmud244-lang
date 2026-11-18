@@ -1,6 +1,6 @@
 # shoaibmahmud244-lang
 
-Data engineer working on web extraction and pipeline reliability.
+Data engineer working on web extraction, pipeline reliability, and local voice tooling.
 
 ## What I work on
 
@@ -12,6 +12,9 @@ Data engineer working on web extraction and pipeline reliability.
 - **n8n workflows that import without secrets** — every credential-dependent
   node ships disabled, so a client can load the file and see the real graph
   before handing over any key.
+- **Local voice engineering & agent perception** — private, on-device voice cloning
+  with full headless CLI automation, rnnoise/afftdn denoising, and objective acoustic
+  verification (LUFS, true peak, F0 autocorrelation) so agents can audit sound.
 
 ## Repos
 
@@ -23,9 +26,10 @@ Data engineer working on web extraction and pipeline reliability.
   faster than real-time with zero resident memory, backed by Engram MCP persistent memory.
 
 - **[voicebox-tui](https://github.com/shoaibmahmud244-lang/voicebox-tui)** —
-  terminal voice studio over chatterbox.cpp: local voice cloning, emotion presets,
-  A/B seed auditioning, and a mastering chain (pitch, EQ, reverb, compression, LUFS)
-  with rnnoise/afftdn denoise. Sources are never modified.
+  terminal voice studio and local voice cloning over chatterbox.cpp turbo models.
+  Features an interactive gum-driven TUI, full headless CLI flags for automation,
+  A/B seed auditioning, and bundled Earshot skills enabling autonomous LLM agents to vet
+  reference audio, audit takes, and master audio to exact EBU R128 LUFS targets.
 
 - **[sandbox-n8n](https://github.com/shoaibmahmud244-lang/sandbox-n8n)** —
   lets an n8n workflow plan and approve system changes **without giving n8n a
@@ -72,6 +76,7 @@ way, including ones I'd shipped in a first pass:
 - my own hardening broke the sandbox shim twice before I checked: a unit that
   made bubblewrap fail on every step, and a `ufw` rule keyed on the wrong end
   of the connection — both looked plausible until executed
+- voice synthesis cannot be audited from logs alone — Earshot provides local acoustic grounding so takes are selected via objective alignment and loudness verification rather than guesswork
 
 The n8n pack also ships the validator that caught it. A file that parses as JSON
 is not a workflow that works, and a validator that only ever passes is a rubber
